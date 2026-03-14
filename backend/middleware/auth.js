@@ -6,7 +6,7 @@ const auth = async(req,res,next) => {
 
         if(!token) {
             return res.status(401).json({
-                message : "Provide token",
+                message : "Please login to continue",
                 error : true,
                 success : false
             })
