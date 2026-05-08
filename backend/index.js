@@ -34,6 +34,7 @@ app.use(helmet({
 }))
 
 const PORT = process.env.PORT || 8080
+const isVercel = Boolean(process.env.VERCEL)
 
 app.get("/",(req,res) => {
     res.json({
@@ -51,11 +52,15 @@ app.use('/api/cart',cartRouter)
 app.use('/api/address',addressRouter)
 app.use('/api/order',orderRouter)
 
-connectDB().then(() => {
+await connectDB()
+
+if (!isVercel) {
     app.listen(PORT, () => {
         console.log("server is running",PORT)
     })
-})
+}
+
+export default app
 
 
 

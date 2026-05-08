@@ -11,6 +11,10 @@ if(!process.env.MONGODB_URL) {
 
 async function connectDB() {
     try {
+        if (mongoose.connection.readyState === 1) {
+            return
+        }
+
         // Avoid SRV DNS resolution issues on some networks.
         dns.setDefaultResultOrder('ipv4first')
         dns.setServers(['8.8.8.8', '1.1.1.1'])
@@ -18,7 +22,7 @@ async function connectDB() {
         console.log("DB connected")
     } catch (error) {
         console.log("Mongodb connect error", error)
-        process.exit(1)
+        throw error
     }
 }
 
