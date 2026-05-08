@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import UploadSubCategoryModel from "../components/uploadSubCategoryModel"
+import UploadSubCategoryModel from "../components/UploadSubCategoryModel"
 import AxiosToastError from "../utils/AxiosToastError"
 import Axios from "../utils/Axios"
 import SummaryApi from "../common/SummaryApi"
