@@ -79,74 +79,97 @@ const ResetPassword = () => {
     }
   };
 
-  console.log("data", data);
-
   return (
-    <section className="w-full container max-auto p-7">
-      <div className="bg-white my-4 w-full max-w-lg mx-auto rounded p-4">
-        <p className="font-semibold text-lg mb-2">Enter your Password</p>
-        <form className="grid gap-4 py-4" onSubmit={handleSubmit}>
-          <div className="grid gap-1">
-            <label htmlFor="newPassword">New Password: </label>
-            <div className="bg-blue-50 p-2 border rounded flex items-center focus-within:border-primary-200">
-              <input
-                type={showPassword ? "text" : "password"}
-                id="password"
-                autoFocus
-                className="w-full outline-none"
-                name="newPassword"
-                value={data.newPassword}
-                onChange={handleChange}
-                placeholder="Enter your new password"
-              />
-              <div
-                onClick={() => setShowPassword((prev) => !prev)}
-                className="cursor-pointer"
-              >
-                {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
-              </div>
-            </div>
+    <section className="relative w-full min-h-[70vh] overflow-hidden bg-gradient-to-br from-emerald-50 via-lime-50 to-amber-100 py-10">
+      <div className="pointer-events-none absolute -top-16 left-10 h-44 w-44 rounded-full bg-lime-200/60 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-20 right-6 h-52 w-52 rounded-full bg-emerald-200/60 blur-3xl" />
+
+      <div className="container mx-auto px-6">
+        <div className="bg-white/90 my-4 w-full max-w-xl mx-auto rounded-2xl border border-emerald-100 p-6 shadow-xl backdrop-blur">
+          <div className="flex items-center gap-3">
+            <span className="rounded-full bg-emerald-600/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-emerald-700">
+              New password
+            </span>
+            <p className="text-sm text-slate-500">Choose a strong password</p>
           </div>
 
-          <div className="grid gap-1">
-            <label htmlFor="confirmPassword">Confirm Password: </label>
-            <div className="bg-blue-50 p-2 border rounded flex items-center focus-within:border-primary-200">
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                id="password"
-                autoFocus
-                className="w-full outline-none"
-                name="confirmPassword"
-                value={data.confirmPassword}
-                onChange={handleChange}
-                placeholder="Enter your confirm password"
-              />
-              <div
-                onClick={() => setShowConfirmPassword((prev) => !prev)}
-                className="cursor-pointer"
-              >
-                {showConfirmPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+          <h1 className="mt-4 text-2xl font-semibold text-slate-900">Reset your password</h1>
+          <p className="mt-1 text-sm text-slate-500">
+            Use at least 8 characters with a mix of letters and numbers.
+          </p>
+
+          <form className="grid gap-5 py-6" onSubmit={handleSubmit}>
+            <div className="grid gap-2">
+              <label htmlFor="newPassword" className="text-sm font-medium text-slate-700">
+                New password
+              </label>
+              <div className="bg-white p-3 border border-slate-200 rounded-xl flex items-center gap-3 shadow-sm focus-within:border-emerald-500 focus-within:ring-2 focus-within:ring-emerald-200">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="newPassword"
+                  autoFocus
+                  className="w-full bg-transparent outline-none"
+                  name="newPassword"
+                  value={data.newPassword}
+                  onChange={handleChange}
+                  placeholder="Enter a new password"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className="text-slate-500 hover:text-slate-700"
+                >
+                  {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                </button>
               </div>
             </div>
-          </div>
-          <button
-            disabled={!validateValue}
-            className={`${
-              validateValue ? "bg-green-800 hover:bg-green-700" : "bg-gray-500"
-            } bg-gray-500 text-white p-2 rounded font-semibold my-3 tracking-wide cursor-pointer`}
-          >
-            Change Password
-          </button>
-        </form>
-        <p>
-          Already have account?{" "}
-          <Link
-            to={"/login"}
-            className="font-semibold text-green-700 hover:text-green-800"
-          >
-            Login
-          </Link>
-        </p>
+
+            <div className="grid gap-2">
+              <label htmlFor="confirmPassword" className="text-sm font-medium text-slate-700">
+                Confirm password
+              </label>
+              <div className="bg-white p-3 border border-slate-200 rounded-xl flex items-center gap-3 shadow-sm focus-within:border-emerald-500 focus-within:ring-2 focus-within:ring-emerald-200">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  id="confirmPassword"
+                  className="w-full bg-transparent outline-none"
+                  name="confirmPassword"
+                  value={data.confirmPassword}
+                  onChange={handleChange}
+                  placeholder="Re-enter your new password"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword((prev) => !prev)}
+                  className="text-slate-500 hover:text-slate-700"
+                >
+                  {showConfirmPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                </button>
+              </div>
+            </div>
+
+            <button
+              disabled={!validateValue}
+              className={`${
+                validateValue
+                  ? "bg-emerald-600 hover:bg-emerald-700"
+                  : "bg-slate-300"
+              } text-white px-4 py-3 rounded-xl font-semibold tracking-wide shadow-md transition`}
+            >
+              Change Password
+            </button>
+          </form>
+
+          <p className="text-sm text-slate-600">
+            Already have account?{" "}
+            <Link
+              to={"/login"}
+              className="font-semibold text-emerald-700 hover:text-emerald-800"
+            >
+              Login
+            </Link>
+          </p>
+        </div>
       </div>
     </section>
   );
